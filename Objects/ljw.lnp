@@ -1,0 +1,10 @@
+--cpu Cortex-M3
+".\objects\common.o"
+".\objects\startup.o"
+".\objects\proc.o"
+".\objects\seg.o"
+".\objects\cal.o"
+".\objects\clk.o"
+--ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\ljw.map" -o .\Objects\ljw.axf

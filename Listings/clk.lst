@@ -1,0 +1,990 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 GET              common.s
+    1 00000000         ;自己确定变量的地址
+    2 00000000 20004900 
+                       SEG_QIAN
+                               EQU              0X20004900  ;存储数码管的千位
+    3 00000000 20004904 
+                       SEG_BAI EQU              0X20004904  ;存储数码管的百位
+    4 00000000 20004908 
+                       SEG_SHI EQU              0X20004908  ;存储数码管的十位
+    5 00000000 2000490C 
+                       SEG_GE  EQU              0X2000490C  ;存储数码管的个位
+    6 00000000 20004910 
+                       SEG_CNT EQU              0X20004910  ;控制数码管的刷新顺
+                                                            序
+    7 00000000         ;寄存器的定义 
+    8 00000000 40010800 
+                       GPIOA_CRL
+                               EQU              0x40010800  ;端口配置低寄存器 
+    9 00000000 40010808 
+                       GPIOA_IDR
+                               EQU              0x40010808  ;端口输入数据寄存器
+                                                            
+   10 00000000 4001080C 
+                       GPIOA_ODR
+                               EQU              0x4001080c  ;端口输出数据寄存器
+                                                            
+   11 00000000 40010C00 
+                       GPIOB_CRL
+                               EQU              0x40010C00  ;端口配置低寄存器 
+   12 00000000 40010C04 
+                       GPIOB_CRH
+                               EQU              0x40010C04  ;端口配置低寄存器 
+   13 00000000 40010C08 
+                       GPIOB_IDR
+                               EQU              0x40010C08  ;端口输入数据寄存器
+                                                            
+   14 00000000 40010C0C 
+                       GPIOB_ODR
+                               EQU              0x40010C0c  ;端口输出数据寄存器
+                                                            
+   15 00000000 40011004 
+                       GPIOC_CRH
+                               EQU              0x40011004  ;端口配置高寄存器 
+   16 00000000 4001100C 
+                       GPIOC_ODR
+                               EQU              0x4001100C  ;端口输出数据寄存器
+                                                             
+   17 00000000 40021018 
+                       RCC_APB2ENR
+                               EQU              0x40021018  ;外设时钟使能寄存器
+                                                            
+   18 00000000 4002101C 
+                       RCC_APB1ENR
+                               EQU              0x4002101C  ;外设时钟使能寄存器
+                                                            
+   19 00000000 40021000 
+                       RCC_CR  EQU              0x40021000  ;控制寄存器
+   20 00000000 40021004 
+                       RCC_CFGR
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                               EQU              0x40021004  ;配置寄存器
+   21 00000000 40000000 
+                       TIM2_CR1
+                               EQU              0x40000000  ;控制寄存器
+   22 00000000 40000028 
+                       TIM2_PSC
+                               EQU              0x40000028  ;预分频寄存器
+   23 00000000 4000002C 
+                       TIM2_ARR
+                               EQU              0x4000002C  ;重装值寄存器
+   24 00000000 4000000C 
+                       TIM2_DIER
+                               EQU              0x4000000C  ;dma/中断使能寄存器
+                                                            
+   25 00000000 40000010 
+                       TIM2_SR EQU              0x40000010  ;状态寄存器 
+   26 00000000 40000400 
+                       TIM3_CR1
+                               EQU              0x40000400  ;控制寄存器 
+   27 00000000 40000428 
+                       TIM3_PSC
+                               EQU              0x40000428  ;预分频寄存器
+   28 00000000 4000042C 
+                       TIM3_ARR
+                               EQU              0x4000042C  ;重装值寄存器
+   29 00000000 4000040C 
+                       TIM3_DIER
+                               EQU              0x4000040C  ;dma/中断使能寄存器
+                                                            
+   30 00000000 40000410 
+                       TIM3_SR EQU              0x40000410  ;状态寄存器
+   31 00000000 40000424 
+                       TIM3_CNT
+                               EQU              0x40000424  ;计数器
+   32 00000000 E000E100 
+                       NVIC_SETENA0
+                               EQU              0xE000E100  ;中断设置使能寄存器
+                                                            
+   33 00000000 E000E180 
+                       NVIC_CLREA0
+                               EQU              0xE000E180  ;中断设置除能寄存器
+                                                            
+   34 00000000 E000E280 
+                       NVIC_CLRPEN
+                               EQU              0xE000E280  ;中断挂起寄存器
+   35 00000000 E000E010 
+                       SYSTICK_CSR
+                               EQU              0xE000E010  ;控制及状态寄存器
+   36 00000000 E000E014 
+                       SYSTICK_RELOAD
+                               EQU              0xE000E014  ;重装值寄存器
+   37 00000000 E000E018 
+                       SYSTICK_CURRENT
+                               EQU              0xE000E018  ;当前值寄存器
+   38 00000000 40003000 
+                       IWDG_KR EQU              0x40003000  ;键寄存器
+   39 00000000 40003004 
+                       IWDG_PR EQU              0x40003004  ;预分频寄存器
+   40 00000000 40003008 
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+                       IWDG_RLR
+                               EQU              0x40003008  ;重装再载寄存器 
+   41 00000000 4000300C 
+                       IWDG_SR EQU              0x4000300c  ;状态寄存器
+   42 00000000         ;标号导入
+   43 00000000                 IMPORT           SHOW0
+   44 00000000                 IMPORT           SHOW1
+   45 00000000                 IMPORT           SHOW2
+   46 00000000                 IMPORT           SHOW3
+   47 00000000                 IMPORT           SHOW4
+   48 00000000                 IMPORT           SHOW5
+   49 00000000                 IMPORT           SHOW6
+   50 00000000                 IMPORT           SHOW7
+   51 00000000                 IMPORT           SHOW8
+   52 00000000                 IMPORT           SHOW9
+   53 00000000                 IMPORT           W1_ON
+   54 00000000                 IMPORT           W2_ON
+   55 00000000                 IMPORT           W3_ON
+   56 00000000                 IMPORT           W4_ON
+   57 00000000                 IMPORT           DP_ON
+   58 00000000                 IMPORT           W1_OFF
+   59 00000000                 IMPORT           W2_OFF
+   60 00000000                 IMPORT           W3_OFF
+   61 00000000                 IMPORT           W4_OFF
+   62 00000000                 IMPORT           DP_OFF
+   63 00000000                 AREA             HEADER, CODE, READONLY
+   64 00000000                 END
+    2 00000000                 AREA             MY_DATA, DATA,READWRITE
+    3 00000000 00000000 
+                       VAR1    DCD              0
+    4 00000004 00000000 
+                       VAR2    DCD              0
+    5 00000008 00000000 
+                       VAR3    DCD              0
+    6 0000000C                 EXPORT           VAR1
+    7 0000000C                 EXPORT           VAR2
+    8 0000000C                 EXPORT           VAR3
+    9 0000000C                 AREA             MY_CODE, CODE, READONLY
+   10 00000000         RCC_CFG PROC
+   11 00000000                 EXPORT           RCC_CFG
+   12 00000000 B500            PUSH             {R14}
+   13 00000002 4842            LDR              R0,=RCC_CR
+   14 00000004 6801            LDR              R1,[R0]
+   15 00000006 F04F 0201       LDR              R2,=0X1
+   16 0000000A EA4F 4202       LSL              R2,#16
+   17 0000000E EA41 0102       ORR              R1,R2
+   18 00000012 6001            STR              R1,[R0]
+   19 00000014         
+   20 00000014 F04F 0201       LDR              R2,=0X1
+   21 00000018 EA4F 4242       LSL              R2,#17
+   22 0000001C         HSE_RDY
+   23 0000001C 6801            LDR              R1,[R0]
+   24 0000001E 4211            TST              R1,R2
+   25 00000020 BF08 F7FF 
+              FFFB             BLEQ             HSE_RDY
+   26 00000026 483A            LDR              R0,=RCC_CFGR
+   27 00000028 6801            LDR              R1,[R0]
+   28 0000002A F04F 0201       LDR              R2,=0X1
+   29 0000002E EA4F 4242       LSL              R2,#17
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+   30 00000032 EA21 0102       BIC              R1,R2       ;不分频
+   31 00000036 F04F 0201       LDR              R2,=0X1
+   32 0000003A EA4F 4202       LSL              R2,#16
+   33 0000003E EA41 0102       ORR              R1,R2       ;HSE为PLL时钟源
+   34 00000042 F04F 0204       LDR              R2,=0X4
+   35 00000046 EA4F 4282       LSL              R2,#18
+   36 0000004A EA41 0102       ORR              R1,R2       ;倍频指数
+   37 0000004E F640 72FF       LDR              R2,=0XFFF   ;0000 0000 0000
+   38 00000052 EA4F 1202       LSL              R2,#4
+   39 00000056 EA21 0102       BIC              R1,R2       ;不分频
+   40 0000005A 6001            STR              R1,[R0]
+   41 0000005C         
+   42 0000005C 482B            LDR              R0,=RCC_CR
+   43 0000005E 6801            LDR              R1,[R0]
+   44 00000060 F04F 0201       LDR              R2,=0X1
+   45 00000064 EA4F 6202       LSL              R2,#24
+   46 00000068 EA41 0102       ORR              R1,R2
+   47 0000006C 6001            STR              R1,[R0]
+   48 0000006E         
+   49 0000006E F04F 0201       LDR              R2,=0X1
+   50 00000072 EA4F 6242       LSL              R2,#25
+   51 00000076         PLL_RDY
+   52 00000076 6801            LDR              R1,[R0]
+   53 00000078 4211            TST              R1,R2
+   54 0000007A BF08 F7FF 
+              FFFB             BLEQ             PLL_RDY
+   55 00000080 4823            LDR              R0,=RCC_CFGR
+   56 00000082 6801            LDR              R1,[R0]
+   57 00000084 F04F 0203       LDR              R2,=0X3
+   58 00000088 EA21 0102       BIC              R1,R2
+   59 0000008C F04F 0202       LDR              R2,=0X2
+   60 00000090 EA41 0102       ORR              R1,R2
+   61 00000094 6001            STR              R1,[R0]
+   62 00000096 481E            LDR              R0,=RCC_CFGR
+   63 00000098         SYS_PLL
+   64 00000098 6801            LDR              R1,[R0]
+   65 0000009A EA4F 0291       LSR              R2,R1,#2
+   66 0000009E F002 0202       AND              R2,#0X2
+   67 000000A2 F012 0F02       TST              R2,#0X2
+   68 000000A6 BF08 F7FF 
+              FFF6             BLEQ             SYS_PLL
+   69 000000AC         
+   70 000000AC BD00            POP              {PC}
+   71 000000AE                 ENDP
+   72 000000AE         CLK_CFG PROC                         ;使能GPIOA、GPIOB、
+                                                            GPIOC时钟
+   73 000000AE                 EXPORT           CLK_CFG
+   74 000000AE 4819            LDR              R0,=RCC_APB2ENR
+   75 000000B0 6801            LDR              R1,[R0]
+   76 000000B2 F04F 0207       LDR              R2,=0X7
+   77 000000B6 EA4F 0282       LSL              R2,#2       ;
+   78 000000BA EA81 0102       EOR              R1,R2
+   79 000000BE 6001            STR              R1,[R0]
+   80 000000C0         
+   81 000000C0         ;使能TIM2、TIM3时钟
+   82 000000C0 4815            LDR              R0,=RCC_APB1ENR
+   83 000000C2 6801            LDR              R1,[R0]
+   84 000000C4 F04F 0203       LDR              R2,=0X3
+   85 000000C8 EA4F 0202       LSL              R2,#0
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+   86 000000CC EA41 0102       ORR              R1,R2
+   87 000000D0 6001            STR              R1,[R0]
+   88 000000D2 4770            BX               R14
+   89 000000D4                 ENDP
+   90 000000D4         SYSTICK_CLK_SOURCE
+                               PROC
+   91 000000D4                 EXPORT           SYSTICK_CLK_SOURCE
+   92 000000D4 4811            LDR              R0,=SYSTICK_CSR
+   93 000000D6 6801            LDR              R1,[R0]
+   94 000000D8 F021 0104       BIC              R1,#4
+   95 000000DC 6001            STR              R1,[R0]
+   96 000000DE 4770            BX               R14
+   97 000000E0                 ENDP
+   98 000000E0         IWDG_CFG
+                               PROC
+   99 000000E0                 EXPORT           IWDG_CFG
+  100 000000E0 480F            LDR              R0,=IWDG_PR
+  101 000000E2 6801            LDR              R1,[R0]
+  102 000000E4 F04F 0203       LDR              R2,=0X3
+  103 000000E8 EA21 0102       BIC              R1,R2
+  104 000000EC 6001            STR              R1,[R0]
+  105 000000EE 480D            LDR              R0,=IWDG_RLR
+  106 000000F0 F640 71FF       LDR              R1,=0XFFF
+  107 000000F4 6001            STR              R1,[R0]
+  108 000000F6 480C            LDR              R0,=IWDG_KR
+  109 000000F8 F64C 41CC       LDR              R1,=0XCCCC
+  110 000000FC 6001            STR              R1,[R0]
+  111 000000FE 4770            BX               R14
+  112 00000100                 ENDP
+  113 00000100         IWDG_FEED
+                               PROC
+  114 00000100                 EXPORT           IWDG_FEED
+  115 00000100 4809            LDR              R0,=IWDG_KR
+  116 00000102 F64A 21AA       LDR              R1,=0XAAAA
+  117 00000106 6001            STR              R1,[R0]
+  118 00000108 4770            BX               R14
+  119 0000010A                 ENDP
+  120 0000010A 00 00           ALIGN
+  121 0000010C                 END
+              40021000 
+              40021004 
+              40021018 
+              4002101C 
+              E000E010 
+              40003004 
+              40003008 
+              40003000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\clk.d -o.\objects\clk.o -IE:\STM32p超声波测距传感器p数码
+管p原理图pARM汇编实现e实现9999毫米内的测距\cgq\RTE -ID:\Keil_v5\ARM\PACK\Keil\S
+TM32F1xx_DFP\2.2.0 -ID:\Keil_v5\ARM\CMSIS\Include --predefine="__UVISION_VERSIO
+N SETA 514" --predefine="STM32F10X_MD SETA 1" --list=.\listings\clk.lst clk.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+HEADER 00000000
+
+Symbol: HEADER
+   Definitions
+      At line 63 in file common.s
+   Uses
+      None
+Comment: HEADER unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+MY_DATA 00000000
+
+Symbol: MY_DATA
+   Definitions
+      At line 2 in file clk.s
+   Uses
+      None
+Comment: MY_DATA unused
+VAR1 00000000
+
+Symbol: VAR1
+   Definitions
+      At line 3 in file clk.s
+   Uses
+      At line 6 in file clk.s
+Comment: VAR1 used once
+VAR2 00000004
+
+Symbol: VAR2
+   Definitions
+      At line 4 in file clk.s
+   Uses
+      At line 7 in file clk.s
+Comment: VAR2 used once
+VAR3 00000008
+
+Symbol: VAR3
+   Definitions
+      At line 5 in file clk.s
+   Uses
+      At line 8 in file clk.s
+Comment: VAR3 used once
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+CLK_CFG 000000AE
+
+Symbol: CLK_CFG
+   Definitions
+      At line 72 in file clk.s
+   Uses
+      At line 73 in file clk.s
+Comment: CLK_CFG used once
+HSE_RDY 0000001C
+
+Symbol: HSE_RDY
+   Definitions
+      At line 22 in file clk.s
+   Uses
+      At line 25 in file clk.s
+Comment: HSE_RDY used once
+IWDG_CFG 000000E0
+
+Symbol: IWDG_CFG
+   Definitions
+      At line 98 in file clk.s
+   Uses
+      At line 99 in file clk.s
+Comment: IWDG_CFG used once
+IWDG_FEED 00000100
+
+Symbol: IWDG_FEED
+   Definitions
+      At line 113 in file clk.s
+   Uses
+      At line 114 in file clk.s
+Comment: IWDG_FEED used once
+MY_CODE 00000000
+
+Symbol: MY_CODE
+   Definitions
+      At line 9 in file clk.s
+   Uses
+      None
+Comment: MY_CODE unused
+PLL_RDY 00000076
+
+Symbol: PLL_RDY
+   Definitions
+      At line 51 in file clk.s
+   Uses
+      At line 54 in file clk.s
+Comment: PLL_RDY used once
+RCC_CFG 00000000
+
+Symbol: RCC_CFG
+   Definitions
+      At line 10 in file clk.s
+   Uses
+      At line 11 in file clk.s
+Comment: RCC_CFG used once
+SYSTICK_CLK_SOURCE 000000D4
+
+Symbol: SYSTICK_CLK_SOURCE
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+   Definitions
+      At line 90 in file clk.s
+   Uses
+      At line 91 in file clk.s
+Comment: SYSTICK_CLK_SOURCE used once
+SYS_PLL 00000098
+
+Symbol: SYS_PLL
+   Definitions
+      At line 63 in file clk.s
+   Uses
+      At line 68 in file clk.s
+Comment: SYS_PLL used once
+9 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+GPIOA_CRL 40010800
+
+Symbol: GPIOA_CRL
+   Definitions
+      At line 8 in file common.s
+   Uses
+      None
+Comment: GPIOA_CRL unused
+GPIOA_IDR 40010808
+
+Symbol: GPIOA_IDR
+   Definitions
+      At line 9 in file common.s
+   Uses
+      None
+Comment: GPIOA_IDR unused
+GPIOA_ODR 4001080C
+
+Symbol: GPIOA_ODR
+   Definitions
+      At line 10 in file common.s
+   Uses
+      None
+Comment: GPIOA_ODR unused
+GPIOB_CRH 40010C04
+
+Symbol: GPIOB_CRH
+   Definitions
+      At line 12 in file common.s
+   Uses
+      None
+Comment: GPIOB_CRH unused
+GPIOB_CRL 40010C00
+
+Symbol: GPIOB_CRL
+   Definitions
+      At line 11 in file common.s
+   Uses
+      None
+Comment: GPIOB_CRL unused
+GPIOB_IDR 40010C08
+
+Symbol: GPIOB_IDR
+   Definitions
+      At line 13 in file common.s
+   Uses
+      None
+Comment: GPIOB_IDR unused
+GPIOB_ODR 40010C0C
+
+Symbol: GPIOB_ODR
+   Definitions
+      At line 14 in file common.s
+   Uses
+      None
+Comment: GPIOB_ODR unused
+GPIOC_CRH 40011004
+
+Symbol: GPIOC_CRH
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Absolute symbols
+
+   Definitions
+      At line 15 in file common.s
+   Uses
+      None
+Comment: GPIOC_CRH unused
+GPIOC_ODR 4001100C
+
+Symbol: GPIOC_ODR
+   Definitions
+      At line 16 in file common.s
+   Uses
+      None
+Comment: GPIOC_ODR unused
+IWDG_KR 40003000
+
+Symbol: IWDG_KR
+   Definitions
+      At line 38 in file common.s
+   Uses
+      At line 108 in file clk.s
+      At line 115 in file clk.s
+
+IWDG_PR 40003004
+
+Symbol: IWDG_PR
+   Definitions
+      At line 39 in file common.s
+   Uses
+      At line 100 in file clk.s
+Comment: IWDG_PR used once
+IWDG_RLR 40003008
+
+Symbol: IWDG_RLR
+   Definitions
+      At line 40 in file common.s
+   Uses
+      At line 105 in file clk.s
+Comment: IWDG_RLR used once
+IWDG_SR 4000300C
+
+Symbol: IWDG_SR
+   Definitions
+      At line 41 in file common.s
+   Uses
+      None
+Comment: IWDG_SR unused
+NVIC_CLREA0 E000E180
+
+Symbol: NVIC_CLREA0
+   Definitions
+      At line 33 in file common.s
+   Uses
+      None
+Comment: NVIC_CLREA0 unused
+NVIC_CLRPEN E000E280
+
+Symbol: NVIC_CLRPEN
+   Definitions
+      At line 34 in file common.s
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Absolute symbols
+
+   Uses
+      None
+Comment: NVIC_CLRPEN unused
+NVIC_SETENA0 E000E100
+
+Symbol: NVIC_SETENA0
+   Definitions
+      At line 32 in file common.s
+   Uses
+      None
+Comment: NVIC_SETENA0 unused
+RCC_APB1ENR 4002101C
+
+Symbol: RCC_APB1ENR
+   Definitions
+      At line 18 in file common.s
+   Uses
+      At line 82 in file clk.s
+Comment: RCC_APB1ENR used once
+RCC_APB2ENR 40021018
+
+Symbol: RCC_APB2ENR
+   Definitions
+      At line 17 in file common.s
+   Uses
+      At line 74 in file clk.s
+Comment: RCC_APB2ENR used once
+RCC_CFGR 40021004
+
+Symbol: RCC_CFGR
+   Definitions
+      At line 20 in file common.s
+   Uses
+      At line 26 in file clk.s
+      At line 55 in file clk.s
+      At line 62 in file clk.s
+
+RCC_CR 40021000
+
+Symbol: RCC_CR
+   Definitions
+      At line 19 in file common.s
+   Uses
+      At line 13 in file clk.s
+      At line 42 in file clk.s
+
+SEG_BAI 20004904
+
+Symbol: SEG_BAI
+   Definitions
+      At line 3 in file common.s
+   Uses
+      None
+Comment: SEG_BAI unused
+SEG_CNT 20004910
+
+Symbol: SEG_CNT
+   Definitions
+      At line 6 in file common.s
+
+
+
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
+Absolute symbols
+
+   Uses
+      None
+Comment: SEG_CNT unused
+SEG_GE 2000490C
+
+Symbol: SEG_GE
+   Definitions
+      At line 5 in file common.s
+   Uses
+      None
+Comment: SEG_GE unused
+SEG_QIAN 20004900
+
+Symbol: SEG_QIAN
+   Definitions
+      At line 2 in file common.s
+   Uses
+      None
+Comment: SEG_QIAN unused
+SEG_SHI 20004908
+
+Symbol: SEG_SHI
+   Definitions
+      At line 4 in file common.s
+   Uses
+      None
+Comment: SEG_SHI unused
+SYSTICK_CSR E000E010
+
+Symbol: SYSTICK_CSR
+   Definitions
+      At line 35 in file common.s
+   Uses
+      At line 92 in file clk.s
+Comment: SYSTICK_CSR used once
+SYSTICK_CURRENT E000E018
+
+Symbol: SYSTICK_CURRENT
+   Definitions
+      At line 37 in file common.s
+   Uses
+      None
+Comment: SYSTICK_CURRENT unused
+SYSTICK_RELOAD E000E014
+
+Symbol: SYSTICK_RELOAD
+   Definitions
+      At line 36 in file common.s
+   Uses
+      None
+Comment: SYSTICK_RELOAD unused
+TIM2_ARR 4000002C
+
+Symbol: TIM2_ARR
+   Definitions
+      At line 23 in file common.s
+   Uses
+      None
+Comment: TIM2_ARR unused
+
+
+
+ARM Macro Assembler    Page 5 Alphabetic symbol ordering
+Absolute symbols
+
+TIM2_CR1 40000000
+
+Symbol: TIM2_CR1
+   Definitions
+      At line 21 in file common.s
+   Uses
+      None
+Comment: TIM2_CR1 unused
+TIM2_DIER 4000000C
+
+Symbol: TIM2_DIER
+   Definitions
+      At line 24 in file common.s
+   Uses
+      None
+Comment: TIM2_DIER unused
+TIM2_PSC 40000028
+
+Symbol: TIM2_PSC
+   Definitions
+      At line 22 in file common.s
+   Uses
+      None
+Comment: TIM2_PSC unused
+TIM2_SR 40000010
+
+Symbol: TIM2_SR
+   Definitions
+      At line 25 in file common.s
+   Uses
+      None
+Comment: TIM2_SR unused
+TIM3_ARR 4000042C
+
+Symbol: TIM3_ARR
+   Definitions
+      At line 28 in file common.s
+   Uses
+      None
+Comment: TIM3_ARR unused
+TIM3_CNT 40000424
+
+Symbol: TIM3_CNT
+   Definitions
+      At line 31 in file common.s
+   Uses
+      None
+Comment: TIM3_CNT unused
+TIM3_CR1 40000400
+
+Symbol: TIM3_CR1
+   Definitions
+      At line 26 in file common.s
+   Uses
+      None
+Comment: TIM3_CR1 unused
+TIM3_DIER 4000040C
+
+Symbol: TIM3_DIER
+
+
+
+ARM Macro Assembler    Page 6 Alphabetic symbol ordering
+Absolute symbols
+
+   Definitions
+      At line 29 in file common.s
+   Uses
+      None
+Comment: TIM3_DIER unused
+TIM3_PSC 40000428
+
+Symbol: TIM3_PSC
+   Definitions
+      At line 27 in file common.s
+   Uses
+      None
+Comment: TIM3_PSC unused
+TIM3_SR 40000410
+
+Symbol: TIM3_SR
+   Definitions
+      At line 30 in file common.s
+   Uses
+      None
+Comment: TIM3_SR unused
+39 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+DP_OFF 00000000
+
+Symbol: DP_OFF
+   Definitions
+      At line 62 in file common.s
+   Uses
+      None
+Comment: DP_OFF unused
+DP_ON 00000000
+
+Symbol: DP_ON
+   Definitions
+      At line 57 in file common.s
+   Uses
+      None
+Comment: DP_ON unused
+SHOW0 00000000
+
+Symbol: SHOW0
+   Definitions
+      At line 43 in file common.s
+   Uses
+      None
+Comment: SHOW0 unused
+SHOW1 00000000
+
+Symbol: SHOW1
+   Definitions
+      At line 44 in file common.s
+   Uses
+      None
+Comment: SHOW1 unused
+SHOW2 00000000
+
+Symbol: SHOW2
+   Definitions
+      At line 45 in file common.s
+   Uses
+      None
+Comment: SHOW2 unused
+SHOW3 00000000
+
+Symbol: SHOW3
+   Definitions
+      At line 46 in file common.s
+   Uses
+      None
+Comment: SHOW3 unused
+SHOW4 00000000
+
+Symbol: SHOW4
+   Definitions
+      At line 47 in file common.s
+   Uses
+      None
+Comment: SHOW4 unused
+SHOW5 00000000
+
+Symbol: SHOW5
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+External symbols
+
+   Definitions
+      At line 48 in file common.s
+   Uses
+      None
+Comment: SHOW5 unused
+SHOW6 00000000
+
+Symbol: SHOW6
+   Definitions
+      At line 49 in file common.s
+   Uses
+      None
+Comment: SHOW6 unused
+SHOW7 00000000
+
+Symbol: SHOW7
+   Definitions
+      At line 50 in file common.s
+   Uses
+      None
+Comment: SHOW7 unused
+SHOW8 00000000
+
+Symbol: SHOW8
+   Definitions
+      At line 51 in file common.s
+   Uses
+      None
+Comment: SHOW8 unused
+SHOW9 00000000
+
+Symbol: SHOW9
+   Definitions
+      At line 52 in file common.s
+   Uses
+      None
+Comment: SHOW9 unused
+W1_OFF 00000000
+
+Symbol: W1_OFF
+   Definitions
+      At line 58 in file common.s
+   Uses
+      None
+Comment: W1_OFF unused
+W1_ON 00000000
+
+Symbol: W1_ON
+   Definitions
+      At line 53 in file common.s
+   Uses
+      None
+Comment: W1_ON unused
+W2_OFF 00000000
+
+Symbol: W2_OFF
+   Definitions
+      At line 59 in file common.s
+   Uses
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+External symbols
+
+      None
+Comment: W2_OFF unused
+W2_ON 00000000
+
+Symbol: W2_ON
+   Definitions
+      At line 54 in file common.s
+   Uses
+      None
+Comment: W2_ON unused
+W3_OFF 00000000
+
+Symbol: W3_OFF
+   Definitions
+      At line 60 in file common.s
+   Uses
+      None
+Comment: W3_OFF unused
+W3_ON 00000000
+
+Symbol: W3_ON
+   Definitions
+      At line 55 in file common.s
+   Uses
+      None
+Comment: W3_ON unused
+W4_OFF 00000000
+
+Symbol: W4_OFF
+   Definitions
+      At line 61 in file common.s
+   Uses
+      None
+Comment: W4_OFF unused
+W4_ON 00000000
+
+Symbol: W4_ON
+   Definitions
+      At line 56 in file common.s
+   Uses
+      None
+Comment: W4_ON unused
+20 symbols
+407 symbols in table

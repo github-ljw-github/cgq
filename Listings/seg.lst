@@ -1,0 +1,611 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 IMPORT           SET_AN
+    2 00000000                 IMPORT           RESET_AN
+    3 00000000                 IMPORT           SET_BN
+    4 00000000                 IMPORT           RESET_BN
+    5 00000000                 AREA             MY_CODE, CODE, READONLY
+    6 00000000         SHOW0   PROC
+    7 00000000                 EXPORT           SHOW0 [WEAK]
+    8 00000000 B500            PUSH             {R14}
+    9 00000002 F04F 0005       LDR              R0,=0X5
+   10 00000006 F7FF FFFE       BL               SET_BN      ;A KO
+   11 0000000A F04F 0009       LDR              R0,=0X9
+   12 0000000E F7FF FFFE       BL               SET_BN      ;B KO
+   13 00000012 F04F 0002       LDR              R0,=0X2
+   14 00000016 F7FF FFFE       BL               SET_AN      ;C KO
+   15 0000001A F04F 0004       LDR              R0,=0X4
+   16 0000001E F7FF FFFE       BL               SET_AN      ;D KO
+   17 00000022 F04F 0005       LDR              R0,=0X5
+   18 00000026 F7FF FFFE       BL               SET_AN      ;E KO
+   19 0000002A F04F 0006       LDR              R0,=0X6
+   20 0000002E F7FF FFFE       BL               SET_BN      ;F KO
+   21 00000032 F04F 0001       LDR              R0,=0X1
+   22 00000036 F7FF FFFE       BL               RESET_AN    ;G KO
+   23 0000003A BD00            POP              {PC}
+   24 0000003C                 ENDP
+   25 0000003C         SHOW1   PROC
+   26 0000003C                 EXPORT           SHOW1
+   27 0000003C B500            PUSH             {R14}
+   28 0000003E F04F 0005       LDR              R0,=0X5
+   29 00000042 F7FF FFFE       BL               RESET_BN    ;A KO
+   30 00000046 F04F 0009       LDR              R0,=0X9
+   31 0000004A F7FF FFFE       BL               SET_BN      ;B KO
+   32 0000004E F04F 0002       LDR              R0,=0X2
+   33 00000052 F7FF FFFE       BL               SET_AN      ;C KO
+   34 00000056 F04F 0004       LDR              R0,=0X4
+   35 0000005A F7FF FFFE       BL               RESET_AN    ;D KO
+   36 0000005E F04F 0005       LDR              R0,=0X5
+   37 00000062 F7FF FFFE       BL               RESET_AN    ;E KO
+   38 00000066 F04F 0006       LDR              R0,=0X6
+   39 0000006A F7FF FFFE       BL               RESET_BN    ;F KO
+   40 0000006E F04F 0001       LDR              R0,=0X1
+   41 00000072 F7FF FFFE       BL               RESET_AN    ;G KO
+   42 00000076 BD00            POP              {PC}
+   43 00000078                 ENDP
+   44 00000078         SHOW2   PROC
+   45 00000078                 EXPORT           SHOW2
+   46 00000078 B500            PUSH             {R14}
+   47 0000007A F04F 0005       LDR              R0,=0X5
+   48 0000007E F7FF FFFE       BL               SET_BN      ;A KO
+   49 00000082 F04F 0009       LDR              R0,=0X9
+   50 00000086 F7FF FFFE       BL               SET_BN      ;B KO
+   51 0000008A F04F 0002       LDR              R0,=0X2
+   52 0000008E F7FF FFFE       BL               RESET_AN    ;C KO
+   53 00000092 F04F 0004       LDR              R0,=0X4
+   54 00000096 F7FF FFFE       BL               SET_AN      ;D KO
+   55 0000009A F04F 0005       LDR              R0,=0X5
+   56 0000009E F7FF FFFE       BL               SET_AN      ;E KO
+   57 000000A2 F04F 0006       LDR              R0,=0X6
+   58 000000A6 F7FF FFFE       BL               RESET_BN    ;F KO
+   59 000000AA F04F 0001       LDR              R0,=0X1
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   60 000000AE F7FF FFFE       BL               SET_AN      ;G KO
+   61 000000B2 BD00            POP              {PC}
+   62 000000B4                 ENDP
+   63 000000B4         SHOW3   PROC
+   64 000000B4                 EXPORT           SHOW3
+   65 000000B4 B500            PUSH             {R14}
+   66 000000B6 F04F 0005       LDR              R0,=0X5
+   67 000000BA F7FF FFFE       BL               SET_BN      ;A KO
+   68 000000BE F04F 0009       LDR              R0,=0X9
+   69 000000C2 F7FF FFFE       BL               SET_BN      ;B KO
+   70 000000C6 F04F 0002       LDR              R0,=0X2
+   71 000000CA F7FF FFFE       BL               SET_AN      ;C KO
+   72 000000CE F04F 0004       LDR              R0,=0X4
+   73 000000D2 F7FF FFFE       BL               SET_AN      ;D KO
+   74 000000D6 F04F 0005       LDR              R0,=0X5
+   75 000000DA F7FF FFFE       BL               RESET_AN    ;E KO
+   76 000000DE F04F 0006       LDR              R0,=0X6
+   77 000000E2 F7FF FFFE       BL               RESET_BN    ;F KO
+   78 000000E6 F04F 0001       LDR              R0,=0X1
+   79 000000EA F7FF FFFE       BL               SET_AN      ;G KO
+   80 000000EE BD00            POP              {PC}
+   81 000000F0                 ENDP
+   82 000000F0         SHOW4   PROC
+   83 000000F0                 EXPORT           SHOW4
+   84 000000F0 B500            PUSH             {R14}
+   85 000000F2 F04F 0005       LDR              R0,=0X5
+   86 000000F6 F7FF FFFE       BL               RESET_BN    ;A KO
+   87 000000FA F04F 0009       LDR              R0,=0X9
+   88 000000FE F7FF FFFE       BL               SET_BN      ;B KO
+   89 00000102 F04F 0002       LDR              R0,=0X2
+   90 00000106 F7FF FFFE       BL               SET_AN      ;C KO
+   91 0000010A F04F 0004       LDR              R0,=0X4
+   92 0000010E F7FF FFFE       BL               RESET_AN    ;D KO
+   93 00000112 F04F 0005       LDR              R0,=0X5
+   94 00000116 F7FF FFFE       BL               RESET_AN    ;E KO
+   95 0000011A F04F 0006       LDR              R0,=0X6
+   96 0000011E F7FF FFFE       BL               SET_BN      ;F KO
+   97 00000122 F04F 0001       LDR              R0,=0X1
+   98 00000126 F7FF FFFE       BL               SET_AN      ;G KO
+   99 0000012A BD00            POP              {PC}
+  100 0000012C                 ENDP
+  101 0000012C         SHOW5   PROC
+  102 0000012C                 EXPORT           SHOW5
+  103 0000012C B500            PUSH             {R14}
+  104 0000012E F04F 0005       LDR              R0,=0X5
+  105 00000132 F7FF FFFE       BL               SET_BN      ;A KO
+  106 00000136 F04F 0009       LDR              R0,=0X9
+  107 0000013A F7FF FFFE       BL               RESET_BN    ;B KO
+  108 0000013E F04F 0002       LDR              R0,=0X2
+  109 00000142 F7FF FFFE       BL               SET_AN      ;C KO
+  110 00000146 F04F 0004       LDR              R0,=0X4
+  111 0000014A F7FF FFFE       BL               SET_AN      ;D KO
+  112 0000014E F04F 0005       LDR              R0,=0X5
+  113 00000152 F7FF FFFE       BL               RESET_AN    ;E KO
+  114 00000156 F04F 0006       LDR              R0,=0X6
+  115 0000015A F7FF FFFE       BL               SET_BN      ;F KO
+  116 0000015E F04F 0001       LDR              R0,=0X1
+  117 00000162 F7FF FFFE       BL               SET_AN      ;G KO
+  118 00000166 BD00            POP              {PC}
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+  119 00000168                 ENDP
+  120 00000168         SHOW6   PROC
+  121 00000168                 EXPORT           SHOW6
+  122 00000168 B500            PUSH             {R14}
+  123 0000016A F04F 0005       LDR              R0,=0X5
+  124 0000016E F7FF FFFE       BL               SET_BN      ;A KO
+  125 00000172 F04F 0009       LDR              R0,=0X9
+  126 00000176 F7FF FFFE       BL               RESET_BN    ;B KO
+  127 0000017A F04F 0002       LDR              R0,=0X2
+  128 0000017E F7FF FFFE       BL               SET_AN      ;C KO
+  129 00000182 F04F 0004       LDR              R0,=0X4
+  130 00000186 F7FF FFFE       BL               SET_AN      ;D KO
+  131 0000018A F04F 0005       LDR              R0,=0X5
+  132 0000018E F7FF FFFE       BL               SET_AN      ;E KO
+  133 00000192 F04F 0006       LDR              R0,=0X6
+  134 00000196 F7FF FFFE       BL               SET_BN      ;F KO
+  135 0000019A F04F 0001       LDR              R0,=0X1
+  136 0000019E F7FF FFFE       BL               SET_AN      ;G KO
+  137 000001A2 BD00            POP              {PC}
+  138 000001A4                 ENDP
+  139 000001A4         SHOW7   PROC
+  140 000001A4                 EXPORT           SHOW7
+  141 000001A4 B500            PUSH             {R14}
+  142 000001A6 F04F 0005       LDR              R0,=0X5
+  143 000001AA F7FF FFFE       BL               SET_BN      ;A KO
+  144 000001AE F04F 0009       LDR              R0,=0X9
+  145 000001B2 F7FF FFFE       BL               SET_BN      ;B KO
+  146 000001B6 F04F 0002       LDR              R0,=0X2
+  147 000001BA F7FF FFFE       BL               SET_AN      ;C KO
+  148 000001BE F04F 0004       LDR              R0,=0X4
+  149 000001C2 F7FF FFFE       BL               RESET_AN    ;D KO
+  150 000001C6 F04F 0005       LDR              R0,=0X5
+  151 000001CA F7FF FFFE       BL               RESET_AN    ;E KO
+  152 000001CE F04F 0006       LDR              R0,=0X6
+  153 000001D2 F7FF FFFE       BL               RESET_BN    ;F KO
+  154 000001D6 F04F 0001       LDR              R0,=0X1
+  155 000001DA F7FF FFFE       BL               RESET_AN    ;G KO
+  156 000001DE BD00            POP              {PC}
+  157 000001E0                 ENDP
+  158 000001E0         SHOW8   PROC
+  159 000001E0                 EXPORT           SHOW8
+  160 000001E0 B500            PUSH             {R14}
+  161 000001E2 F04F 0005       LDR              R0,=0X5
+  162 000001E6 F7FF FFFE       BL               SET_BN      ;A KO
+  163 000001EA F04F 0009       LDR              R0,=0X9
+  164 000001EE F7FF FFFE       BL               SET_BN      ;B KO
+  165 000001F2 F04F 0002       LDR              R0,=0X2
+  166 000001F6 F7FF FFFE       BL               SET_AN      ;C KO
+  167 000001FA F04F 0004       LDR              R0,=0X4
+  168 000001FE F7FF FFFE       BL               SET_AN      ;D KO
+  169 00000202 F04F 0005       LDR              R0,=0X5
+  170 00000206 F7FF FFFE       BL               SET_AN      ;E KO
+  171 0000020A F04F 0006       LDR              R0,=0X6
+  172 0000020E F7FF FFFE       BL               SET_BN      ;F KO
+  173 00000212 F04F 0001       LDR              R0,=0X1
+  174 00000216 F7FF FFFE       BL               SET_AN      ;G KO
+  175 0000021A BD00            POP              {PC}
+  176 0000021C                 ENDP
+  177 0000021C         SHOW9   PROC
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+  178 0000021C                 EXPORT           SHOW9
+  179 0000021C B500            PUSH             {R14}
+  180 0000021E F04F 0005       LDR              R0,=0X5
+  181 00000222 F7FF FFFE       BL               SET_BN      ;A KO
+  182 00000226 F04F 0009       LDR              R0,=0X9
+  183 0000022A F7FF FFFE       BL               SET_BN      ;B KO
+  184 0000022E F04F 0002       LDR              R0,=0X2
+  185 00000232 F7FF FFFE       BL               SET_AN      ;C KO
+  186 00000236 F04F 0004       LDR              R0,=0X4
+  187 0000023A F7FF FFFE       BL               SET_AN      ;D KO
+  188 0000023E F04F 0005       LDR              R0,=0X5
+  189 00000242 F7FF FFFE       BL               RESET_AN    ;E KO
+  190 00000246 F04F 0006       LDR              R0,=0X6
+  191 0000024A F7FF FFFE       BL               SET_BN      ;F KO
+  192 0000024E F04F 0001       LDR              R0,=0X1
+  193 00000252 F7FF FFFE       BL               SET_AN      ;G KO
+  194 00000256 BD00            POP              {PC}
+  195 00000258                 ENDP
+  196 00000258         W1_ON   PROC
+  197 00000258                 EXPORT           W1_ON
+  198 00000258 B500            PUSH             {R14}
+  199 0000025A F04F 0006       LDR              R0,=6
+  200 0000025E F7FF FFFE       BL               RESET_AN    ;W1
+  201 00000262 BD00            POP              {PC}
+  202 00000264                 ENDP
+  203 00000264         W1_OFF  PROC
+  204 00000264                 EXPORT           W1_OFF
+  205 00000264 B500            PUSH             {R14}
+  206 00000266 F04F 0006       LDR              R0,=6
+  207 0000026A F7FF FFFE       BL               SET_AN      ;W1
+  208 0000026E BD00            POP              {PC}
+  209 00000270                 ENDP
+  210 00000270         W2_ON   PROC
+  211 00000270                 EXPORT           W2_ON
+  212 00000270 B500            PUSH             {R14}
+  213 00000272 F04F 0007       LDR              R0,=7
+  214 00000276 F7FF FFFE       BL               RESET_BN    ;W2
+  215 0000027A BD00            POP              {PC}
+  216 0000027C                 ENDP
+  217 0000027C         W2_OFF  PROC
+  218 0000027C                 EXPORT           W2_OFF
+  219 0000027C B500            PUSH             {R14}
+  220 0000027E F04F 0007       LDR              R0,=7
+  221 00000282 F7FF FFFE       BL               SET_BN      ;W2
+  222 00000286 BD00            POP              {PC}
+  223 00000288                 ENDP
+  224 00000288         W3_ON   PROC
+  225 00000288                 EXPORT           W3_ON
+  226 00000288 B500            PUSH             {R14}
+  227 0000028A F04F 0008       LDR              R0,=8
+  228 0000028E F7FF FFFE       BL               RESET_BN    ;W3
+  229 00000292 BD00            POP              {PC}
+  230 00000294                 ENDP
+  231 00000294         W3_OFF  PROC
+  232 00000294                 EXPORT           W3_OFF
+  233 00000294 B500            PUSH             {R14}
+  234 00000296 F04F 0008       LDR              R0,=8
+  235 0000029A F7FF FFFE       BL               SET_BN      ;W3
+  236 0000029E BD00            POP              {PC}
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+  237 000002A0                 ENDP
+  238 000002A0         W4_ON   PROC
+  239 000002A0                 EXPORT           W4_ON
+  240 000002A0 B500            PUSH             {R14}
+  241 000002A2 F04F 0000       LDR              R0,=0X0
+  242 000002A6 F7FF FFFE       BL               RESET_AN    ;W4
+  243 000002AA BD00            POP              {PC}
+  244 000002AC                 ENDP
+  245 000002AC         W4_OFF  PROC
+  246 000002AC                 EXPORT           W4_OFF
+  247 000002AC B500            PUSH             {R14}
+  248 000002AE F04F 0000       LDR              R0,=0X0
+  249 000002B2 F7FF FFFE       BL               SET_AN      ;W4
+  250 000002B6 BD00            POP              {PC}
+  251 000002B8                 ENDP
+  252 000002B8         DP_OFF  PROC
+  253 000002B8 B500            PUSH             {R14}
+  254 000002BA                 EXPORT           DP_OFF
+  255 000002BA F04F 0003       LDR              R0,=0X3
+  256 000002BE F7FF FFFE       BL               RESET_AN    ;DP
+  257 000002C2 BD00            POP              {PC}
+  258 000002C4                 ENDP
+  259 000002C4         DP_ON   PROC
+  260 000002C4 B500            PUSH             {R14}
+  261 000002C6                 EXPORT           DP_ON
+  262 000002C6 F04F 0003       LDR              R0,=0X3
+  263 000002CA F7FF FFFE       BL               SET_AN      ;DP
+  264 000002CE BD00            POP              {PC}
+  265 000002D0                 ENDP
+  266 000002D0                 ALIGN
+  267 000002D0                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\seg.d -o.\objects\seg.o -IE:\STM32p超声波测距传感器p数码
+管p原理图pARM汇编实现e实现9999毫米内的测距\cgq\RTE -ID:\Keil_v5\ARM\PACK\Keil\S
+TM32F1xx_DFP\2.2.0 -ID:\Keil_v5\ARM\CMSIS\Include --predefine="__UVISION_VERSIO
+N SETA 514" --predefine="STM32F10X_MD SETA 1" --list=.\listings\seg.lst seg.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+DP_OFF 000002B8
+
+Symbol: DP_OFF
+   Definitions
+      At line 252 in file seg.s
+   Uses
+      At line 254 in file seg.s
+Comment: DP_OFF used once
+DP_ON 000002C4
+
+Symbol: DP_ON
+   Definitions
+      At line 259 in file seg.s
+   Uses
+      At line 261 in file seg.s
+Comment: DP_ON used once
+MY_CODE 00000000
+
+Symbol: MY_CODE
+   Definitions
+      At line 5 in file seg.s
+   Uses
+      None
+Comment: MY_CODE unused
+SHOW0 00000000
+
+Symbol: SHOW0
+   Definitions
+      At line 6 in file seg.s
+   Uses
+      At line 7 in file seg.s
+Comment: SHOW0 used once
+SHOW1 0000003C
+
+Symbol: SHOW1
+   Definitions
+      At line 25 in file seg.s
+   Uses
+      At line 26 in file seg.s
+Comment: SHOW1 used once
+SHOW2 00000078
+
+Symbol: SHOW2
+   Definitions
+      At line 44 in file seg.s
+   Uses
+      At line 45 in file seg.s
+Comment: SHOW2 used once
+SHOW3 000000B4
+
+Symbol: SHOW3
+   Definitions
+      At line 63 in file seg.s
+   Uses
+      At line 64 in file seg.s
+Comment: SHOW3 used once
+SHOW4 000000F0
+
+Symbol: SHOW4
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+   Definitions
+      At line 82 in file seg.s
+   Uses
+      At line 83 in file seg.s
+Comment: SHOW4 used once
+SHOW5 0000012C
+
+Symbol: SHOW5
+   Definitions
+      At line 101 in file seg.s
+   Uses
+      At line 102 in file seg.s
+Comment: SHOW5 used once
+SHOW6 00000168
+
+Symbol: SHOW6
+   Definitions
+      At line 120 in file seg.s
+   Uses
+      At line 121 in file seg.s
+Comment: SHOW6 used once
+SHOW7 000001A4
+
+Symbol: SHOW7
+   Definitions
+      At line 139 in file seg.s
+   Uses
+      At line 140 in file seg.s
+Comment: SHOW7 used once
+SHOW8 000001E0
+
+Symbol: SHOW8
+   Definitions
+      At line 158 in file seg.s
+   Uses
+      At line 159 in file seg.s
+Comment: SHOW8 used once
+SHOW9 0000021C
+
+Symbol: SHOW9
+   Definitions
+      At line 177 in file seg.s
+   Uses
+      At line 178 in file seg.s
+Comment: SHOW9 used once
+W1_OFF 00000264
+
+Symbol: W1_OFF
+   Definitions
+      At line 203 in file seg.s
+   Uses
+      At line 204 in file seg.s
+Comment: W1_OFF used once
+W1_ON 00000258
+
+Symbol: W1_ON
+   Definitions
+      At line 196 in file seg.s
+   Uses
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Relocatable symbols
+
+      At line 197 in file seg.s
+Comment: W1_ON used once
+W2_OFF 0000027C
+
+Symbol: W2_OFF
+   Definitions
+      At line 217 in file seg.s
+   Uses
+      At line 218 in file seg.s
+Comment: W2_OFF used once
+W2_ON 00000270
+
+Symbol: W2_ON
+   Definitions
+      At line 210 in file seg.s
+   Uses
+      At line 211 in file seg.s
+Comment: W2_ON used once
+W3_OFF 00000294
+
+Symbol: W3_OFF
+   Definitions
+      At line 231 in file seg.s
+   Uses
+      At line 232 in file seg.s
+Comment: W3_OFF used once
+W3_ON 00000288
+
+Symbol: W3_ON
+   Definitions
+      At line 224 in file seg.s
+   Uses
+      At line 225 in file seg.s
+Comment: W3_ON used once
+W4_OFF 000002AC
+
+Symbol: W4_OFF
+   Definitions
+      At line 245 in file seg.s
+   Uses
+      At line 246 in file seg.s
+Comment: W4_OFF used once
+W4_ON 000002A0
+
+Symbol: W4_ON
+   Definitions
+      At line 238 in file seg.s
+   Uses
+      At line 239 in file seg.s
+Comment: W4_ON used once
+21 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+RESET_AN 00000000
+
+Symbol: RESET_AN
+   Definitions
+      At line 2 in file seg.s
+   Uses
+      At line 22 in file seg.s
+      At line 35 in file seg.s
+      At line 37 in file seg.s
+      At line 41 in file seg.s
+      At line 52 in file seg.s
+      At line 75 in file seg.s
+      At line 92 in file seg.s
+      At line 94 in file seg.s
+      At line 113 in file seg.s
+      At line 149 in file seg.s
+      At line 151 in file seg.s
+      At line 155 in file seg.s
+      At line 189 in file seg.s
+      At line 200 in file seg.s
+      At line 242 in file seg.s
+      At line 256 in file seg.s
+
+RESET_BN 00000000
+
+Symbol: RESET_BN
+   Definitions
+      At line 4 in file seg.s
+   Uses
+      At line 29 in file seg.s
+      At line 39 in file seg.s
+      At line 58 in file seg.s
+      At line 77 in file seg.s
+      At line 86 in file seg.s
+      At line 107 in file seg.s
+      At line 126 in file seg.s
+      At line 153 in file seg.s
+      At line 214 in file seg.s
+      At line 228 in file seg.s
+
+SET_AN 00000000
+
+Symbol: SET_AN
+   Definitions
+      At line 1 in file seg.s
+   Uses
+      At line 14 in file seg.s
+      At line 16 in file seg.s
+      At line 18 in file seg.s
+      At line 33 in file seg.s
+      At line 54 in file seg.s
+      At line 56 in file seg.s
+      At line 60 in file seg.s
+      At line 71 in file seg.s
+      At line 73 in file seg.s
+      At line 79 in file seg.s
+      At line 90 in file seg.s
+      At line 98 in file seg.s
+      At line 109 in file seg.s
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+External symbols
+
+      At line 111 in file seg.s
+      At line 117 in file seg.s
+      At line 128 in file seg.s
+      At line 130 in file seg.s
+      At line 132 in file seg.s
+      At line 136 in file seg.s
+      At line 147 in file seg.s
+      At line 166 in file seg.s
+      At line 168 in file seg.s
+      At line 170 in file seg.s
+      At line 174 in file seg.s
+      At line 185 in file seg.s
+      At line 187 in file seg.s
+      At line 193 in file seg.s
+      At line 207 in file seg.s
+      At line 249 in file seg.s
+      At line 263 in file seg.s
+
+SET_BN 00000000
+
+Symbol: SET_BN
+   Definitions
+      At line 3 in file seg.s
+   Uses
+      At line 10 in file seg.s
+      At line 12 in file seg.s
+      At line 20 in file seg.s
+      At line 31 in file seg.s
+      At line 48 in file seg.s
+      At line 50 in file seg.s
+      At line 67 in file seg.s
+      At line 69 in file seg.s
+      At line 88 in file seg.s
+      At line 96 in file seg.s
+      At line 105 in file seg.s
+      At line 115 in file seg.s
+      At line 124 in file seg.s
+      At line 134 in file seg.s
+      At line 143 in file seg.s
+      At line 145 in file seg.s
+      At line 162 in file seg.s
+      At line 164 in file seg.s
+      At line 172 in file seg.s
+      At line 181 in file seg.s
+      At line 183 in file seg.s
+      At line 191 in file seg.s
+      At line 221 in file seg.s
+      At line 235 in file seg.s
+
+4 symbols
+357 symbols in table

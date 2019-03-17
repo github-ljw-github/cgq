@@ -1,0 +1,712 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;×Ô¼ºÈ·¶¨±äÁ¿µÄµØÖ·
+    2 00000000 20004900 
+                       SEG_QIAN
+                               EQU              0X20004900  ;´æ´¢ÊýÂë¹ÜµÄÇ§Î»
+    3 00000000 20004904 
+                       SEG_BAI EQU              0X20004904  ;´æ´¢ÊýÂë¹ÜµÄ°ÙÎ»
+    4 00000000 20004908 
+                       SEG_SHI EQU              0X20004908  ;´æ´¢ÊýÂë¹ÜµÄÊ®Î»
+    5 00000000 2000490C 
+                       SEG_GE  EQU              0X2000490C  ;´æ´¢ÊýÂë¹ÜµÄ¸öÎ»
+    6 00000000 20004910 
+                       SEG_CNT EQU              0X20004910  ;¿ØÖÆÊýÂë¹ÜµÄË¢ÐÂË³
+                                                            Ðò
+    7 00000000         ;¼Ä´æÆ÷µÄ¶¨Òå 
+    8 00000000 40010800 
+                       GPIOA_CRL
+                               EQU              0x40010800  ;¶Ë¿ÚÅäÖÃµÍ¼Ä´æÆ÷ 
+    9 00000000 40010808 
+                       GPIOA_IDR
+                               EQU              0x40010808  ;¶Ë¿ÚÊäÈëÊý¾Ý¼Ä´æÆ÷
+                                                            
+   10 00000000 4001080C 
+                       GPIOA_ODR
+                               EQU              0x4001080c  ;¶Ë¿ÚÊä³öÊý¾Ý¼Ä´æÆ÷
+                                                            
+   11 00000000 40010C00 
+                       GPIOB_CRL
+                               EQU              0x40010C00  ;¶Ë¿ÚÅäÖÃµÍ¼Ä´æÆ÷ 
+   12 00000000 40010C04 
+                       GPIOB_CRH
+                               EQU              0x40010C04  ;¶Ë¿ÚÅäÖÃµÍ¼Ä´æÆ÷ 
+   13 00000000 40010C08 
+                       GPIOB_IDR
+                               EQU              0x40010C08  ;¶Ë¿ÚÊäÈëÊý¾Ý¼Ä´æÆ÷
+                                                            
+   14 00000000 40010C0C 
+                       GPIOB_ODR
+                               EQU              0x40010C0c  ;¶Ë¿ÚÊä³öÊý¾Ý¼Ä´æÆ÷
+                                                            
+   15 00000000 40011004 
+                       GPIOC_CRH
+                               EQU              0x40011004  ;¶Ë¿ÚÅäÖÃ¸ß¼Ä´æÆ÷ 
+   16 00000000 4001100C 
+                       GPIOC_ODR
+                               EQU              0x4001100C  ;¶Ë¿ÚÊä³öÊý¾Ý¼Ä´æÆ÷
+                                                             
+   17 00000000 40021018 
+                       RCC_APB2ENR
+                               EQU              0x40021018  ;ÍâÉèÊ±ÖÓÊ¹ÄÜ¼Ä´æÆ÷
+                                                            
+   18 00000000 4002101C 
+                       RCC_APB1ENR
+                               EQU              0x4002101C  ;ÍâÉèÊ±ÖÓÊ¹ÄÜ¼Ä´æÆ÷
+                                                            
+   19 00000000 40021000 
+                       RCC_CR  EQU              0x40021000  ;¿ØÖÆ¼Ä´æÆ÷
+   20 00000000 40021004 
+                       RCC_CFGR
+                               EQU              0x40021004  ;ÅäÖÃ¼Ä´æÆ÷
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   21 00000000 40000000 
+                       TIM2_CR1
+                               EQU              0x40000000  ;¿ØÖÆ¼Ä´æÆ÷
+   22 00000000 40000028 
+                       TIM2_PSC
+                               EQU              0x40000028  ;Ô¤·ÖÆµ¼Ä´æÆ÷
+   23 00000000 4000002C 
+                       TIM2_ARR
+                               EQU              0x4000002C  ;ÖØ×°Öµ¼Ä´æÆ÷
+   24 00000000 4000000C 
+                       TIM2_DIER
+                               EQU              0x4000000C  ;dma/ÖÐ¶ÏÊ¹ÄÜ¼Ä´æÆ÷
+                                                            
+   25 00000000 40000010 
+                       TIM2_SR EQU              0x40000010  ;×´Ì¬¼Ä´æÆ÷ 
+   26 00000000 40000400 
+                       TIM3_CR1
+                               EQU              0x40000400  ;¿ØÖÆ¼Ä´æÆ÷ 
+   27 00000000 40000428 
+                       TIM3_PSC
+                               EQU              0x40000428  ;Ô¤·ÖÆµ¼Ä´æÆ÷
+   28 00000000 4000042C 
+                       TIM3_ARR
+                               EQU              0x4000042C  ;ÖØ×°Öµ¼Ä´æÆ÷
+   29 00000000 4000040C 
+                       TIM3_DIER
+                               EQU              0x4000040C  ;dma/ÖÐ¶ÏÊ¹ÄÜ¼Ä´æÆ÷
+                                                            
+   30 00000000 40000410 
+                       TIM3_SR EQU              0x40000410  ;×´Ì¬¼Ä´æÆ÷
+   31 00000000 40000424 
+                       TIM3_CNT
+                               EQU              0x40000424  ;¼ÆÊýÆ÷
+   32 00000000 E000E100 
+                       NVIC_SETENA0
+                               EQU              0xE000E100  ;ÖÐ¶ÏÉèÖÃÊ¹ÄÜ¼Ä´æÆ÷
+                                                            
+   33 00000000 E000E180 
+                       NVIC_CLREA0
+                               EQU              0xE000E180  ;ÖÐ¶ÏÉèÖÃ³ýÄÜ¼Ä´æÆ÷
+                                                            
+   34 00000000 E000E280 
+                       NVIC_CLRPEN
+                               EQU              0xE000E280  ;ÖÐ¶Ï¹ÒÆð¼Ä´æÆ÷
+   35 00000000 E000E010 
+                       SYSTICK_CSR
+                               EQU              0xE000E010  ;¿ØÖÆ¼°×´Ì¬¼Ä´æÆ÷
+   36 00000000 E000E014 
+                       SYSTICK_RELOAD
+                               EQU              0xE000E014  ;ÖØ×°Öµ¼Ä´æÆ÷
+   37 00000000 E000E018 
+                       SYSTICK_CURRENT
+                               EQU              0xE000E018  ;µ±Ç°Öµ¼Ä´æÆ÷
+   38 00000000 40003000 
+                       IWDG_KR EQU              0x40003000  ;¼ü¼Ä´æÆ÷
+   39 00000000 40003004 
+                       IWDG_PR EQU              0x40003004  ;Ô¤·ÖÆµ¼Ä´æÆ÷
+   40 00000000 40003008 
+                       IWDG_RLR
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+                               EQU              0x40003008  ;ÖØ×°ÔÙÔØ¼Ä´æÆ÷ 
+   41 00000000 4000300C 
+                       IWDG_SR EQU              0x4000300c  ;×´Ì¬¼Ä´æÆ÷
+   42 00000000         ;±êºÅµ¼Èë
+   43 00000000                 IMPORT           SHOW0
+   44 00000000                 IMPORT           SHOW1
+   45 00000000                 IMPORT           SHOW2
+   46 00000000                 IMPORT           SHOW3
+   47 00000000                 IMPORT           SHOW4
+   48 00000000                 IMPORT           SHOW5
+   49 00000000                 IMPORT           SHOW6
+   50 00000000                 IMPORT           SHOW7
+   51 00000000                 IMPORT           SHOW8
+   52 00000000                 IMPORT           SHOW9
+   53 00000000                 IMPORT           W1_ON
+   54 00000000                 IMPORT           W2_ON
+   55 00000000                 IMPORT           W3_ON
+   56 00000000                 IMPORT           W4_ON
+   57 00000000                 IMPORT           DP_ON
+   58 00000000                 IMPORT           W1_OFF
+   59 00000000                 IMPORT           W2_OFF
+   60 00000000                 IMPORT           W3_OFF
+   61 00000000                 IMPORT           W4_OFF
+   62 00000000                 IMPORT           DP_OFF
+   63 00000000                 AREA             HEADER, CODE, READONLY
+   64 00000000                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\common.d -o.\objects\common.o -IE:\STM32p³¬Éù²¨²â¾à´«¸ÐÆ
+÷pÊýÂë¹ÜpÔ­ÀíÍ¼pARM»ã±àÊµÏÖeÊµÏÖ9999ºÁÃ×ÄÚµÄ²â¾à\cgq\RTE -ID:\Keil_v5\ARM\PACK\
+Keil\STM32F1xx_DFP\2.2.0 -ID:\Keil_v5\ARM\CMSIS\Include --predefine="__UVISION_
+VERSION SETA 514" --predefine="STM32F10X_MD SETA 1" --list=.\listings\common.ls
+t common.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+HEADER 00000000
+
+Symbol: HEADER
+   Definitions
+      At line 63 in file common.s
+   Uses
+      None
+Comment: HEADER unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+GPIOA_CRL 40010800
+
+Symbol: GPIOA_CRL
+   Definitions
+      At line 8 in file common.s
+   Uses
+      None
+Comment: GPIOA_CRL unused
+GPIOA_IDR 40010808
+
+Symbol: GPIOA_IDR
+   Definitions
+      At line 9 in file common.s
+   Uses
+      None
+Comment: GPIOA_IDR unused
+GPIOA_ODR 4001080C
+
+Symbol: GPIOA_ODR
+   Definitions
+      At line 10 in file common.s
+   Uses
+      None
+Comment: GPIOA_ODR unused
+GPIOB_CRH 40010C04
+
+Symbol: GPIOB_CRH
+   Definitions
+      At line 12 in file common.s
+   Uses
+      None
+Comment: GPIOB_CRH unused
+GPIOB_CRL 40010C00
+
+Symbol: GPIOB_CRL
+   Definitions
+      At line 11 in file common.s
+   Uses
+      None
+Comment: GPIOB_CRL unused
+GPIOB_IDR 40010C08
+
+Symbol: GPIOB_IDR
+   Definitions
+      At line 13 in file common.s
+   Uses
+      None
+Comment: GPIOB_IDR unused
+GPIOB_ODR 40010C0C
+
+Symbol: GPIOB_ODR
+   Definitions
+      At line 14 in file common.s
+   Uses
+      None
+Comment: GPIOB_ODR unused
+GPIOC_CRH 40011004
+
+Symbol: GPIOC_CRH
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Absolute symbols
+
+   Definitions
+      At line 15 in file common.s
+   Uses
+      None
+Comment: GPIOC_CRH unused
+GPIOC_ODR 4001100C
+
+Symbol: GPIOC_ODR
+   Definitions
+      At line 16 in file common.s
+   Uses
+      None
+Comment: GPIOC_ODR unused
+IWDG_KR 40003000
+
+Symbol: IWDG_KR
+   Definitions
+      At line 38 in file common.s
+   Uses
+      None
+Comment: IWDG_KR unused
+IWDG_PR 40003004
+
+Symbol: IWDG_PR
+   Definitions
+      At line 39 in file common.s
+   Uses
+      None
+Comment: IWDG_PR unused
+IWDG_RLR 40003008
+
+Symbol: IWDG_RLR
+   Definitions
+      At line 40 in file common.s
+   Uses
+      None
+Comment: IWDG_RLR unused
+IWDG_SR 4000300C
+
+Symbol: IWDG_SR
+   Definitions
+      At line 41 in file common.s
+   Uses
+      None
+Comment: IWDG_SR unused
+NVIC_CLREA0 E000E180
+
+Symbol: NVIC_CLREA0
+   Definitions
+      At line 33 in file common.s
+   Uses
+      None
+Comment: NVIC_CLREA0 unused
+NVIC_CLRPEN E000E280
+
+Symbol: NVIC_CLRPEN
+   Definitions
+      At line 34 in file common.s
+   Uses
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Absolute symbols
+
+      None
+Comment: NVIC_CLRPEN unused
+NVIC_SETENA0 E000E100
+
+Symbol: NVIC_SETENA0
+   Definitions
+      At line 32 in file common.s
+   Uses
+      None
+Comment: NVIC_SETENA0 unused
+RCC_APB1ENR 4002101C
+
+Symbol: RCC_APB1ENR
+   Definitions
+      At line 18 in file common.s
+   Uses
+      None
+Comment: RCC_APB1ENR unused
+RCC_APB2ENR 40021018
+
+Symbol: RCC_APB2ENR
+   Definitions
+      At line 17 in file common.s
+   Uses
+      None
+Comment: RCC_APB2ENR unused
+RCC_CFGR 40021004
+
+Symbol: RCC_CFGR
+   Definitions
+      At line 20 in file common.s
+   Uses
+      None
+Comment: RCC_CFGR unused
+RCC_CR 40021000
+
+Symbol: RCC_CR
+   Definitions
+      At line 19 in file common.s
+   Uses
+      None
+Comment: RCC_CR unused
+SEG_BAI 20004904
+
+Symbol: SEG_BAI
+   Definitions
+      At line 3 in file common.s
+   Uses
+      None
+Comment: SEG_BAI unused
+SEG_CNT 20004910
+
+Symbol: SEG_CNT
+   Definitions
+      At line 6 in file common.s
+   Uses
+      None
+Comment: SEG_CNT unused
+SEG_GE 2000490C
+
+
+
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
+Absolute symbols
+
+
+Symbol: SEG_GE
+   Definitions
+      At line 5 in file common.s
+   Uses
+      None
+Comment: SEG_GE unused
+SEG_QIAN 20004900
+
+Symbol: SEG_QIAN
+   Definitions
+      At line 2 in file common.s
+   Uses
+      None
+Comment: SEG_QIAN unused
+SEG_SHI 20004908
+
+Symbol: SEG_SHI
+   Definitions
+      At line 4 in file common.s
+   Uses
+      None
+Comment: SEG_SHI unused
+SYSTICK_CSR E000E010
+
+Symbol: SYSTICK_CSR
+   Definitions
+      At line 35 in file common.s
+   Uses
+      None
+Comment: SYSTICK_CSR unused
+SYSTICK_CURRENT E000E018
+
+Symbol: SYSTICK_CURRENT
+   Definitions
+      At line 37 in file common.s
+   Uses
+      None
+Comment: SYSTICK_CURRENT unused
+SYSTICK_RELOAD E000E014
+
+Symbol: SYSTICK_RELOAD
+   Definitions
+      At line 36 in file common.s
+   Uses
+      None
+Comment: SYSTICK_RELOAD unused
+TIM2_ARR 4000002C
+
+Symbol: TIM2_ARR
+   Definitions
+      At line 23 in file common.s
+   Uses
+      None
+Comment: TIM2_ARR unused
+TIM2_CR1 40000000
+
+Symbol: TIM2_CR1
+   Definitions
+
+
+
+ARM Macro Assembler    Page 5 Alphabetic symbol ordering
+Absolute symbols
+
+      At line 21 in file common.s
+   Uses
+      None
+Comment: TIM2_CR1 unused
+TIM2_DIER 4000000C
+
+Symbol: TIM2_DIER
+   Definitions
+      At line 24 in file common.s
+   Uses
+      None
+Comment: TIM2_DIER unused
+TIM2_PSC 40000028
+
+Symbol: TIM2_PSC
+   Definitions
+      At line 22 in file common.s
+   Uses
+      None
+Comment: TIM2_PSC unused
+TIM2_SR 40000010
+
+Symbol: TIM2_SR
+   Definitions
+      At line 25 in file common.s
+   Uses
+      None
+Comment: TIM2_SR unused
+TIM3_ARR 4000042C
+
+Symbol: TIM3_ARR
+   Definitions
+      At line 28 in file common.s
+   Uses
+      None
+Comment: TIM3_ARR unused
+TIM3_CNT 40000424
+
+Symbol: TIM3_CNT
+   Definitions
+      At line 31 in file common.s
+   Uses
+      None
+Comment: TIM3_CNT unused
+TIM3_CR1 40000400
+
+Symbol: TIM3_CR1
+   Definitions
+      At line 26 in file common.s
+   Uses
+      None
+Comment: TIM3_CR1 unused
+TIM3_DIER 4000040C
+
+Symbol: TIM3_DIER
+   Definitions
+      At line 29 in file common.s
+   Uses
+      None
+
+
+
+ARM Macro Assembler    Page 6 Alphabetic symbol ordering
+Absolute symbols
+
+Comment: TIM3_DIER unused
+TIM3_PSC 40000428
+
+Symbol: TIM3_PSC
+   Definitions
+      At line 27 in file common.s
+   Uses
+      None
+Comment: TIM3_PSC unused
+TIM3_SR 40000410
+
+Symbol: TIM3_SR
+   Definitions
+      At line 30 in file common.s
+   Uses
+      None
+Comment: TIM3_SR unused
+39 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+DP_OFF 00000000
+
+Symbol: DP_OFF
+   Definitions
+      At line 62 in file common.s
+   Uses
+      None
+Comment: DP_OFF unused
+DP_ON 00000000
+
+Symbol: DP_ON
+   Definitions
+      At line 57 in file common.s
+   Uses
+      None
+Comment: DP_ON unused
+SHOW0 00000000
+
+Symbol: SHOW0
+   Definitions
+      At line 43 in file common.s
+   Uses
+      None
+Comment: SHOW0 unused
+SHOW1 00000000
+
+Symbol: SHOW1
+   Definitions
+      At line 44 in file common.s
+   Uses
+      None
+Comment: SHOW1 unused
+SHOW2 00000000
+
+Symbol: SHOW2
+   Definitions
+      At line 45 in file common.s
+   Uses
+      None
+Comment: SHOW2 unused
+SHOW3 00000000
+
+Symbol: SHOW3
+   Definitions
+      At line 46 in file common.s
+   Uses
+      None
+Comment: SHOW3 unused
+SHOW4 00000000
+
+Symbol: SHOW4
+   Definitions
+      At line 47 in file common.s
+   Uses
+      None
+Comment: SHOW4 unused
+SHOW5 00000000
+
+Symbol: SHOW5
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+External symbols
+
+   Definitions
+      At line 48 in file common.s
+   Uses
+      None
+Comment: SHOW5 unused
+SHOW6 00000000
+
+Symbol: SHOW6
+   Definitions
+      At line 49 in file common.s
+   Uses
+      None
+Comment: SHOW6 unused
+SHOW7 00000000
+
+Symbol: SHOW7
+   Definitions
+      At line 50 in file common.s
+   Uses
+      None
+Comment: SHOW7 unused
+SHOW8 00000000
+
+Symbol: SHOW8
+   Definitions
+      At line 51 in file common.s
+   Uses
+      None
+Comment: SHOW8 unused
+SHOW9 00000000
+
+Symbol: SHOW9
+   Definitions
+      At line 52 in file common.s
+   Uses
+      None
+Comment: SHOW9 unused
+W1_OFF 00000000
+
+Symbol: W1_OFF
+   Definitions
+      At line 58 in file common.s
+   Uses
+      None
+Comment: W1_OFF unused
+W1_ON 00000000
+
+Symbol: W1_ON
+   Definitions
+      At line 53 in file common.s
+   Uses
+      None
+Comment: W1_ON unused
+W2_OFF 00000000
+
+Symbol: W2_OFF
+   Definitions
+      At line 59 in file common.s
+   Uses
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+External symbols
+
+      None
+Comment: W2_OFF unused
+W2_ON 00000000
+
+Symbol: W2_ON
+   Definitions
+      At line 54 in file common.s
+   Uses
+      None
+Comment: W2_ON unused
+W3_OFF 00000000
+
+Symbol: W3_OFF
+   Definitions
+      At line 60 in file common.s
+   Uses
+      None
+Comment: W3_OFF unused
+W3_ON 00000000
+
+Symbol: W3_ON
+   Definitions
+      At line 55 in file common.s
+   Uses
+      None
+Comment: W3_ON unused
+W4_OFF 00000000
+
+Symbol: W4_OFF
+   Definitions
+      At line 61 in file common.s
+   Uses
+      None
+Comment: W4_OFF unused
+W4_ON 00000000
+
+Symbol: W4_ON
+   Definitions
+      At line 56 in file common.s
+   Uses
+      None
+Comment: W4_ON unused
+20 symbols
+392 symbols in table
